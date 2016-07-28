@@ -2,11 +2,107 @@
 	"variables": [],
 	"info": {
 		"name": "August",
-		"_postman_id": "af2de988-4c9c-5347-f931-6ff77eab48b0",
+		"_postman_id": "d0f05640-4a23-559c-d82a-d059da5d9bf7",
 		"description": "Exploring the August API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Airbnb",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Locks",
+					"request": {
+						"url": "https://api-production.august.com/airbnb/listings/{{ListingId}}/locks",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Lock",
+					"request": {
+						"url": "https://api-production.august.com/airbnb/listings/{{ListingId}}/locks/{{LockId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate",
+					"request": {
+						"url": "https://api-production.august.com/airbnb/authtoken",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Authentication",
 			"description": "",
@@ -475,6 +571,277 @@
 						"description": "Gets my Bridges"
 					},
 					"response": []
+				},
+				{
+					"name": "Enable Offline Notifications",
+					"request": {
+						"url": "https://api-production.august.com/bridges/{{BridgeId}}/notifications/system",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[]"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cameras",
+			"description": "",
+			"item": [
+				{
+					"name": "Delete camera",
+					"request": {
+						"url": "https://api-production.august.com/cameras/{{NestcamId}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Connect",
+			"description": "APIs called directly by the connect device or hosted by the connect device.",
+			"item": [
+				{
+					"name": "SetWifi",
+					"request": {
+						"url": "http://192.168.10.1/secure/network",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/octet-stream",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "File should be the following JSON object: `{\"ssid\":\"{{SSID}}\",\"security\":7, \"key\":\"{{WiFiPSK}}\"}` encrypted with AES128/CBC/PKCS7 with they key `675d30d06ec68cb5e9bf5d7a794fe51e`. Unsecure networks should use a WiFiPSK of empty string, and a security value of 0.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "DeviceInfo",
+					"request": {
+						"url": "http://192.168.10.1/deviceinfo",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-device",
+								"value": "connect",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "SetLock",
+					"request": {
+						"url": "http://192.168.10.1/secure/bridge",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"bridgeId\":\"{{BridgeId}}\", \"authToken\" : \"{{BridgeAuthToken}}\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetBridges",
+					"request": {
+						"url": "https://rbs.august.com/bridges/{{MfgBridgeId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-device",
+								"value": "connect",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Configured",
+					"request": {
+						"url": "http://192.168.10.1/configured",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetOps",
+					"request": {
+						"url": "https://rbs.august.com/lockop/{{BridgeId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-device",
+								"value": "connect",
+								"description": ""
+							},
+							{
+								"key": "x-august-bridge-auth-token",
+								"value": "{{BridgeAuthToken}}",
+								"description": ""
+							},
+							{
+								"key": "bridge-firmware-version",
+								"value": "2.0.54-3",
+								"description": ""
+							},
+							{
+								"key": "bridge-wlan-rssi",
+								"value": "-36",
+								"description": ""
+							},
+							{
+								"key": "bridge-wlan-snr",
+								"value": "57",
+								"description": ""
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "identity",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "NotifyOfConnect",
+					"request": {
+						"url": "https://rbs.august.com/messages/{{LockId}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-device",
+								"value": "connect",
+								"description": ""
+							},
+							{
+								"key": "x-august-bridge-auth-token",
+								"value": "{{BridgeAuthToken}}",
+								"description": ""
+							},
+							{
+								"key": "bridge-firmware-version",
+								"value": "2.0.54-3",
+								"description": ""
+							},
+							{
+								"key": "bridge-wlan-rssi",
+								"value": "-36",
+								"description": ""
+							},
+							{
+								"key": "bridge-wlan-snr",
+								"value": "57",
+								"description": ""
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "identity",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"event\": \"connectionState\",\n    \"lockID\": \"{{LockId}}\",\n    \"rssi\": -57,\n    \"state\": \"connected\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
 				}
 			]
 		},
@@ -539,6 +906,186 @@
 							"raw": "{\n  \"serialNumber\": \"{{DoorbellSn}}\"\n}"
 						},
 						"description": "Add doorbell to house"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Doorbell",
+					"request": {
+						"url": "https://api-production.august.com/doorbells/{{DoorbellId}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"serialNumber\": \"{{DoorbellSn}}\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doorbell",
+					"request": {
+						"url": "https://api-production.august.com/doorbells/{{DoorbellId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"serialNumber\": \"{{DoorbellSn}}\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Video token",
+					"request": {
+						"url": "https://api-production.august.com/doorbells/{{DoorbellId}}/avsession/token",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"serialNumber\": \"{{DoorbellSn}}\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add Lock",
+					"request": {
+						"url": "https://api-production.august.com/doorbells/{{DoorbellId}}/lock/{{LockId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Connects a doorbell to a lock."
+					},
+					"response": []
+				},
+				{
+					"name": "Add Nest Cam",
+					"request": {
+						"url": "https://api-production.august.com/doorbells/{{DoorbellId}}/cameras/{{NestcamId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Connects a nestcam to a lock."
+					},
+					"response": []
+				},
+				{
+					"name": "Reboot",
+					"request": {
+						"url": "https://api-production.august.com/doorbells/{{DoorbellId}}/reboot",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
 					},
 					"response": []
 				}
@@ -907,6 +1454,126 @@
 						"description": "Removes a guest access rule."
 					},
 					"response": []
+				},
+				{
+					"name": "Write in guestbook",
+					"request": {
+						"url": "https://api-production.august.com/houses/{{HouseId}}/guestbook",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"Are you awake?\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user from rule",
+					"request": {
+						"url": "https://api-production.august.com/rules/{{RuleId}}/{{GuestUserId}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add user to rule",
+					"request": {
+						"url": "https://api-production.august.com/rules/{{RuleId}}/{{GuestUserId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Tell august about a nonuser",
+					"request": {
+						"url": "https://api-production.august.com/unverifiedusers/{{GuestUserId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"lockID\": \"{{LockId}}\",\n    \"firstName\": \"Example\",\n    \"lastName\": \"Smith\"\n}\n"
+						},
+						"description": "Tell august the name of one of your guests."
+					},
+					"response": []
 				}
 			]
 		},
@@ -1059,6 +1726,66 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n  \"Apartment\":\"000001\",\n  \"City\":\"Farse town\",\n  \"HouseName\":\"Lair 1\",\n  \"PostalCode\":\"\",\n  \"State\":\"\",\n  \"Street\":\"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get House Temperature",
+					"request": {
+						"url": "https://api-production.august.com/houses/{{HouseId}}/temperature",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Not sure what this does yet."
+					},
+					"response": []
+				},
+				{
+					"name": "Update House image",
+					"request": {
+						"url": "https://api-production.august.com/houses/{{HouseId}}/image",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
 						},
 						"description": ""
 					},
@@ -1305,6 +2032,36 @@
 						"body": {
 							"mode": "raw",
 							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get code",
+					"request": {
+						"url": "https://api-production.august.com/locks/{{LockId}}/code",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
 						},
 						"description": ""
 					},
@@ -1702,7 +2459,157 @@
 							"mode": "raw",
 							"raw": "{\n  \"zone\": \"America/Chicago\"\n}"
 						},
+						"description": "url ends with: oldtime/newtime"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Nest Cam",
+					"request": {
+						"url": "https://api-production.august.com/locks/cameras/{{LockId}}/{{NestcamId}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Connects a nestcam to a lock."
+					},
+					"response": []
+				},
+				{
+					"name": "Tell August all params have been set",
+					"request": {
+						"url": "https://api-production.august.com/locks/acknowledgeparamupdate/{{LockId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"zone\": \"America/Chicago\"\n}"
+						},
 						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove camera",
+					"request": {
+						"url": "https://api-production.august.com/locks/cameras/{{LockId}}/{{NestcamId}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Sync pins",
+					"request": {
+						"url": "https://api-production.august.com/locks/{{LockId}}/pins/sync",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Set pin for user",
+					"request": {
+						"url": "https://api-production.august.com/locks/{{LockId}}/users/{{UserId}}/pin",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n}"
+						},
+						"description": "TODO: figure out body"
 					},
 					"response": []
 				}
@@ -1955,6 +2862,66 @@
 							"formdata": []
 						},
 						"description": "Checks to see if August wants user to view any documents."
+					},
+					"response": []
+				},
+				{
+					"name": "Partners",
+					"request": {
+						"url": "https://api-production.august.com/partners",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Have partners send me spam",
+					"request": {
+						"url": "https://api-production.august.com/partners/{{PartnerId}}/mailinglist",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "x-kease-api-key",
+								"value": "{{KeaseApiKey}}",
+								"description": ""
+							},
+							{
+								"key": "x-august-access-token",
+								"value": "{{ApiKey}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\":\"{{Email}}\"\n}"
+						},
+						"description": ""
 					},
 					"response": []
 				}
