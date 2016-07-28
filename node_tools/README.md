@@ -23,10 +23,13 @@ Example *environment.json*
 	]
 }
 ```
-
 Once you have your environment set up you can run any of the included applications.
 
 ```bash
+# install node 6.0 or later
+# install dependencies
+npm install
+
 # build project
 npm run build
 
