@@ -1,3 +1,4 @@
+throw('This is very much so a work in progress, it does not work at all today. Running it may corrupt your lock.');
 const lockScanner = require('./lib/lock_scanner');
 const Session = require('./lib/offline_session');
 const Keychain = require('./lib/keychain');
