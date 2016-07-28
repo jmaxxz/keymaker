@@ -14,6 +14,7 @@ than a traditional lock.
 ## MCU Service UUIDS
 
 | MCU Service UUIDs                |
+|----------------------------------|
 | bd4ac6110b4511e38ffd0800200c9a66 |
 
 
