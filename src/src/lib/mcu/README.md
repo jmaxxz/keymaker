@@ -2,7 +2,7 @@
 
 We may not know exactly why August Called this service MCU
 we can have a damn good guess. MCU is a common term which
-is short hand for microcontroller. In an August lock all
+is short for microcontroller unit. In an August lock all
 messages sent to the MCU service are decrypted by the
 TI CC2540 and sent to the STM32L152CC the STM32L is
 responsibile for the openning and closing of the lock along
