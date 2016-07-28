@@ -1,7 +1,7 @@
 ##How to use
-Create an **environment.json** file in this directory. This file will automatically be ignored by git. This file is used to store your configuration data used to access August's restful api, and to authenticate with your lock.
+Create an *environment.json* file in this directory. This file will automatically be ignored by git. This file is used to store your configuration data used to access August's restful api, and to authenticate with your lock.
 
-Example **environment.json**
+Example *environment.json*
 ```json
 {
 	"api": {
