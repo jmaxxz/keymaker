@@ -13,9 +13,9 @@ const fs = require('fs');
 require('./lib/async_logging');
 
 // Be sure and delete this file prior to reading out a new lock
-// it is not automatically recreated because the lock has
-// a tendency to stop responding after 6000ish reads
-// as such in order to get a complete read of the flash
+// it is not automatically recreated because the lock has a
+// tendency to stop responding after 6000ish reads on one of my
+// locks. as such in order to get a complete read of the flash
 // one must run this app multiple time changing the starting
 // index on each run. If application hangs just rerun using
 // the last number logged to the console as the starting index.

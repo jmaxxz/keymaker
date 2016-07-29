@@ -3,7 +3,7 @@ const util = require('util');
 const environmentConfig = require('../environment.json');
 require('./lib/async_logging');
 
-var api = new Api(environmentConfig);
+var api = new Api(environmentConfig.api);
 
 async function main() {
   try{

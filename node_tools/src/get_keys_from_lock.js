@@ -9,8 +9,9 @@ const environmentConfig = require('../environment.json');
 const Environment = require('./lib/environment')
 require('./lib/async_logging');
 
+//32196
 const keyMap = [
-  { start: 32196, count: 1, offset: 4, initialSlot: 0, ignoreChecksum: true },
+  { start: 32185, count: 1, offset: 4, initialSlot: 0, ignoreChecksum: true },
   { start: 17410, count: 99, offset: 4, initialSlot: 1 },
   { start: 17920, count: 100, offset: 0, initialSlot: 100 },
   { start: 18432, count: 57, offset: 0, initialSlot: 200 }

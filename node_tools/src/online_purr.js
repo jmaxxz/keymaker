@@ -24,7 +24,6 @@ async function onSessionStart(session) {
 
 lockScanner.on('lockFound', async lock => {
   try {
-    lock.id = '7B0CA6635E895F0D7EE597C92BC4C137';
     var session = new Session(lock, environmentConfig.api);
     session.on('secWrite', d=>log('comp->sec', d));
     session.on('mcuWrite', d=>log('comp->mcu', d));
