@@ -25,6 +25,8 @@ const secIndicateId = 'bd4ac6140b4511e38ffd0800200c9a66';
 var Lock = function Lock(peripheral) {
   EventEmitter.call(this);
   this.peripheral = peripheral;
+  peripheral.on('warning', d=>this.emit('warning'));
+  peripheral.on('disconnect', d=>this.emit('disconnect'));
   this.characteristics = {};
   this.name = peripheral.advertisement.localName;
   this.btId = peripheral.id;

@@ -87,6 +87,7 @@ lockScanner.on('lockFound', async lock => {
   try {
     var session = new Session(lock, keychain, keychain.preferedKeyId);
     session.once('established', async d=>await onSessionStart(session));
+    session.on('disconnect', d=>console.log('Disconnected from', lock.id))
     lock.on('error', d=>log('err', d));
     session.on('error', d=>log('err', d));
     await session.establish();

@@ -20,10 +20,11 @@ var OnlineSession = function OnlineSession(lock, apiSession) {
   this.api = new Api(apiSession);
   this.keychain = new Keychain();
   this.connectionKeyId = '0f00';
+  lock.on('warning', d=>this.emit('warning'));
+  lock.on('disconnect', d=>this.emit('disconnect'));
   //lock.on('secUpdate', d=>this.decryptSec(d));
   //lock.on('mcuUpdate', d=>this.decryptMcu(d));
-  // Delay the processing of the update in order to let passive
-  // observers see the messages in the order they occur
+
 }
 
 var OnlineSessionPrototype = function OnlineSessionPrototype() {
@@ -76,7 +77,7 @@ var OnlineSessionPrototype = function OnlineSessionPrototype() {
     try {
       var cipherMsg = new RawMessage(data);
       var secCommand = new SecCommand(cipherMsg.data);
-      switch(secCommand.commandAsInt) {
+      switch(secCommand.command) {
         case 4:
           this.keychain.resetStream();
           this.emit('established');
@@ -91,7 +92,7 @@ var OnlineSessionPrototype = function OnlineSessionPrototype() {
     var halfKey = crypto.randomBytes(8);
     this.sessionKeyPt1 = halfKey.toString('hex');
     var results = await this.api.initComms(this.lock.id, halfKey);
-    this.emit('secWrite', cmd.sendSessionKey(this.sessionKeyPt1).addChecksum().data + '0f00');
+    this.emit('secWrite', cmd.sendSessionKey(this.sessionKeyPt1).data + '0f00');
 
     this.lock.once('secUpdate', this.initComms2.bind(this));
     await this.lock.secWrite(results.packet);

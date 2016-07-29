@@ -19,6 +19,7 @@ async function onSessionStart(session) {
 }
 
 lockScanner.on('lockFound', async lock => {
+  console.log('Connected to', lock.id);
   try {
     var session = new Session(lock, environmentConfig.api);
     session.on('secWrite', d=>log('comp->sec', d));
@@ -26,6 +27,7 @@ lockScanner.on('lockFound', async lock => {
     session.on('secUpdate', d=>log('sec->comp', d));
     session.on('mcuUpdate', d=>log('mcu->comp', d));
     session.once('established', async d=>await onSessionStart(session));
+    session.on('disconnect', d=>console.log('Disconnected from', lock.id))
     lock.on('error', d=>log('err', d));
     await session.establish();
   } catch (e) {

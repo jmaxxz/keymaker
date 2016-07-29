@@ -27,6 +27,7 @@ lockScanner.on('lockFound', async lock => {
     session.on('mcuWrite', d=>log('comp->mcu', d));
     session.on('secUpdate', d=>log('sec->comp', d));
     session.on('mcuUpdate', d=>log('mcu->comp', d));
+    session.on('disconnect', d=>console.log('Disconnected from', lock.id))
     session.once('established', async d=>{
       await session.mcuWrite(cmd.unlock().data);
       await delay(7000);

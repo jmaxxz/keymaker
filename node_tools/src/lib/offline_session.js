@@ -12,6 +12,8 @@ var OfflineSession = function(lock, keychain, connectionKeyId) {
   this.connectionKeyId = connectionKeyId || keychain.preferedKeyId;
   this.sessionKeyPt1 = null;
   this.key = null;
+  lock.on('warning', d=>this.emit('warning'));
+  lock.on('disconnect', d=>this.emit('disconnect'));
   lock.on('secUpdate', d=>this.decryptSec(d));
   lock.on('mcuUpdate', d=>this.decryptMcu(d));
   // Delay the processing of the update in order to let passive
