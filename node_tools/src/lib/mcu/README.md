@@ -1,15 +1,6 @@
 # What is the MCU
 
-We may not know exactly why August called this service MCU
-we can have a damn good guess. MCU is a common term which
-is short for microcontroller unit. In an August lock all
-messages sent to the MCU service are decrypted by the
-TI CC2541 and sent to the STM32L152CC. The STM32L is
-responsibile for the opening and closing of the lock along
-with sound, led animation, auto relocking, and many of the
-other features which make the August lock "smarter"
-than a traditional lock.
-
+We may not know exactly why August called this service MCU we can have a damn good guess. MCU is a common term which is short for microcontroller unit. In an August lock all messages sent to the MCU service are decrypted by the TI CC2541 and sent to the STM32L152CC. The STM32L is responsibile for the opening and closing of the lock along with sound, led animation, auto relocking, and many of the other features which make the August lock "smarter" than a traditional lock.
 
 ## MCU Service UUIDS
 
@@ -22,9 +13,7 @@ than a traditional lock.
 
 ## Message Structure
 
-Messages to the MCU service follow a simple structure
-most messages have the following fields/structure. (fields
-are in the order they appear in the messages.)
+Messages to the MCU service follow a simple structure most messages have the following fields/structure. (fields are in the order they appear in the messages.)
 
 | Byte index | Length (in bytes) | Name           | Description                                                                                 |
 |------------|-------------------|----------------|---------------------------------------------------------------------------------------------|
