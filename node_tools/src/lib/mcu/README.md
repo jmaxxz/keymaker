@@ -1,6 +1,6 @@
 # What is the MCU
 
-We may not know exactly why August Called this service MCU
+We may not know exactly why August called this service MCU
 we can have a damn good guess. MCU is a common term which
 is short for microcontroller unit. In an August lock all
 messages sent to the MCU service are decrypted by the
