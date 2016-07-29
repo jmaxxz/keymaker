@@ -32,11 +32,12 @@ async function onSecResponse(session, data, state) {
     await session.secWrite(cmd.readSecFlash(i).data);
   } else {
     console.log(data);
+    await session.disconnect();
   }
 }
 
 async function onSessionStart(session) {
-  session.on('secUpdate', d=>onSecResponse(session, d));
+  session.on('secUpdate', async d=>await onSecResponse(session, d));
   await session.secWrite(cmd.readSecFlash(startingIndex).data);
 }
 
@@ -50,7 +51,7 @@ lockScanner.on('lockFound', async lock => {
 
   try {
     var session = new Session(lock, keychain);
-    session.once('established', d=>onSessionStart(session));
+    session.once('established', async d=>await onSessionStart(session));
     lock.on('error', d=>log('err', d));
     session.on('error', d=>log('err', d));
     await session.establish();

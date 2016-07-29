@@ -31,6 +31,7 @@ module.exports = new Enum({
   '28': 'OtaResetAssetStore',
   '29': 'SetAndModifyCurrentSlice',
   '30': 'OtaReserved',
+  //gap
   '32': 'MotorPolarityDiscovery',
   '33': 'NopAck',
   '34': 'Nop',

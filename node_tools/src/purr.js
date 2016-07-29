@@ -35,7 +35,7 @@ lockScanner.on('lockFound', async lock => {
     session.on('mcuWrite', d=>log('comp->mcu', d));
     session.on('secUpdate', d=>log('sec->comp', d));
     session.on('mcuUpdate', d=>log('mcu->comp', d));
-    session.once('established', d=>onSessionStart(session));
+    session.once('established', async d=>await onSessionStart(session));
     lock.on('error', d=>log('err', d));
     session.on('error', d=>log('err', d));
     await session.establish();

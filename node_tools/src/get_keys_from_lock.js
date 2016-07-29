@@ -62,9 +62,7 @@ async function onSecResponse(session, state, data) {
       state.buffer = Buffer.alloc(20 * keyMap[state.part].count + keyMap[state.part].offset + 20);
       return await session.secWrite(cmd.readSecFlash(keyMap[state.part].start).data);
     }
-
-    await session.secWrite(cmd.disconnect().data)
-    session.disconnect();
+    await session.disconnect();
   } else {
     console.log('sec->comp', secCmd);
   }
@@ -74,7 +72,7 @@ async function onSessionStart(session) {
   var mapPartIndex = 0;
   var buffer = Buffer.alloc(20 * keyMap[mapPartIndex].count + keyMap[mapPartIndex].offset + 20);
   var state = { results: [], part: mapPartIndex, buffer: buffer };
-  session.on('secUpdate', d=>onSecResponse(session, state, d));
+  session.on('secUpdate', async d=>await onSecResponse(session, state, d));
   await session.secWrite(cmd.readSecFlash(keyMap[mapPartIndex].start).data);
 }
 
@@ -88,7 +86,7 @@ lockScanner.on('lockFound', async lock => {
 
   try {
     var session = new Session(lock, keychain, keychain.preferedKeyId);
-    session.once('established', d=>onSessionStart(session));
+    session.once('established', async d=>await onSessionStart(session));
     lock.on('error', d=>log('err', d));
     session.on('error', d=>log('err', d));
     await session.establish();

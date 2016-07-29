@@ -45,7 +45,11 @@ var OfflineSessionPrototype = function OfflineSessionPrototype() {
   }
 
   this.disconnect = async function disconnect() {
-    await this.lock.disconnect()
+    try {
+      await this.secWrite(cmd.disconnect().data);
+    } finally {
+      await this.lock.disconnect()
+    }
   }
 
   this.processSecUpdate = async function processSecUpdate(data) {

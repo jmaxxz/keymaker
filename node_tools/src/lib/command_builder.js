@@ -222,9 +222,9 @@ exports.commitOfflineKey = function commitOfflineKey(key, keyId) {
 
 exports.clearKeySlot = function clearKeySlot(keyId) {
   constraint.isUInt(keyId, 'keyId');
-  constraint.isBetween(keyId, 'keyId', 0, 16);
+  constraint.isBetweenInclusive(keyId, 'keyId', 0, 255);
 
-  if(keyIndex === 0) {
+  if(keyId === 0) {
     /*
     * Why is this dangerous?
     *
@@ -243,12 +243,8 @@ exports.clearKeySlot = function clearKeySlot(keyId) {
     +'you know what you are doing.';
   }
 
-  if(key instanceof Buffer) {
-    key = key.toString('hex');
-  }
-
   var temp = new Buffer('17000000000000000000000000000000', 'hex');
-  temp.writeUInt8(keyIndex, 4);
+  temp.writeUInt8(keyId, 4);
 
   return new SecCommand(temp.toString('hex')).addChecksum();
 }

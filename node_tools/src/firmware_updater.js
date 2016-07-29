@@ -44,7 +44,7 @@ async function onLockResponse(session, data) {
 }
 
 async function onSessionStart(session) {
-  session.on('mcuUpdate', d=>onLockResponse(session, d));
+  session.on('mcuUpdate', async d=>await onLockResponse(session, d));
   console.log("fwl: "+firmware.length);
   await session.mcuWrite(cmd.createAsset(1, 10, firmware.length, firmwareCrc).data);
   for (var i = 0; i < 768; i++) {
@@ -67,7 +67,7 @@ lockScanner.on('lockFound', async lock => {
     session.on('mcuWrite', d=>log('comp->mcu', d));
     session.on('secUpdate', d=>log('sec->comp', d));
     session.on('mcuUpdate', d=>log('mcu->comp', d));
-    session.once('established', d=>onSessionStart(session));
+    session.once('established', async d=>await onSessionStart(session));
     lock.on('error', d=>log('err', d));
     session.on('error', d=>log('err', d));
     await session.establish();

