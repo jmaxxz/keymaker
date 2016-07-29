@@ -4,12 +4,12 @@ We may not know exactly why August called this service MCU we can have a damn go
 
 ## MCU Service UUIDS
 
-| Name     | MCU Service UUIDs                | Model  |
+| Name     | MCU characteristic UUIDs         | Model  |
 |----------|----------------------------------|--------|
 | Write    | bd4ac6110b4511e38ffd0800200c9a66 | ASL-01 |
 | Indicate | bd4ac6120b4511e38ffd0800200c9a66 | ASL-01 |
-| Write    | e295c55169d011e4b116123b93f75cba | ASL-02 |
-| Indicate | e295c55269d011e4b116123b93f75cba | ASL-02 |
+| Write    | e295c55169d011e4b116123b93f75cba | ASL-02?|
+| Indicate | e295c55269d011e4b116123b93f75cba | ASL-02?|
 
 ## Message Structure
 
