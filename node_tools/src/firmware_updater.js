@@ -25,8 +25,7 @@ function log(channel, data) {
 
 async function onLockResponse(session, data) {
   var command = new McuCommand(data.substring(0,32));
-  var cmdName = mcuEnum.byId[command.command];
-  switch(cmdName) {
+  switch(secEnum.commandName) {
     case 'OtaError':
       console.log('Error!')
       process.exit();

@@ -1,9 +1,6 @@
 const statusEnum = require('./status_enum');
 const lockStateEnum = require('./lock_state_enum');
-module.exports = function(buffer, start) {
-  // Welp the first part of the message has already been read
-  // let's ignore it!
-  this.commandName = 'GetStatus'
+module.exports = function(buffer) {
   this.statusType = buffer.readUInt8(4);
   this.valueName = statusEnum.byId[this.statusType];
   switch(this.valueName){

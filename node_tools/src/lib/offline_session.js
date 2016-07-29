@@ -52,9 +52,9 @@ var OfflineSessionPrototype = function OfflineSessionPrototype() {
     try {
       var cipherMsg = new RawMessage(data);
       var secCommand = new SecCommand(cipherMsg.data);
-      switch(secCommand.commandAsByte) {
+      switch(secCommand.command) {
         case 2:
-          this.key = this.sessionKeyPt1 + secCommand.parameter1 + secCommand.parameter2;
+          this.key = this.sessionKeyPt1 + secCommand.halfKey;
           this.keychain.setSessionKey(this.key, cipherMsg.keyId);
           await this.secWrite(cmd.finializeSessionKey().data, cipherMsg.keyId);
         break;

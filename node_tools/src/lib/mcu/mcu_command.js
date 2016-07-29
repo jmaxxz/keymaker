@@ -1,10 +1,13 @@
 const McuStatus = require('./status_parser');
+const secEnum = require('./command_enum');
+
 const CommandParser = require('./command_parser');
 
 var McuCommand = function McuCommand(data) {
   if(typeof(data) != 'string')
     data = data.toString('hex');
-  var buffer = new Buffer(data, 'hex');
+  var buffer = Buffer.from(data, 'hex');
+  this.rawBuffer = buffer;
   this.data = data;
 
   // bb == response
@@ -13,6 +16,7 @@ var McuCommand = function McuCommand(data) {
   //
   this.magic = buffer.readUInt8(0);
   this.command = buffer.readUInt8(1);
+  this.commandName = secEnum.byId[this.command];
   var comandExtender = CommandParser[this.command];
   this.msgNumber = buffer.readUInt8(2);
   this.checksum = buffer.readUInt8(3);

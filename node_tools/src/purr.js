@@ -1,6 +1,6 @@
 const lockScanner = require('./lib/lock_scanner');
 const Session = require('./lib/offline_session');
-const Keychain = require('./lib/keychain');
+const SecCommand = require('./lib/sec/sec_command');
 const util = require('util');
 const delay = require('./lib/delay');
 const cmd = require('./lib/command_builder');

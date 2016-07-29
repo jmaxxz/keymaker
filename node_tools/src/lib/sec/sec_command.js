@@ -1,17 +1,18 @@
+const secEnum = require('./command_enum');
+const CommandParser = require('./command_parser');
+
 var SecCommand = function SecCommand(data) {
   if(typeof(data) != 'string')
     data = data.toString('hex');
-  var buffer = new Buffer(data, 'hex');
+  var buffer = Buffer.from(data, 'hex');
   this.rawBuffer = buffer;
   this.data = data;
-  this.shortCommand = data.substring(0, 2);
-  this.parameter1 = data.substring(8, 16);
-  this.parameter2 = data.substring(16, 24);
-  this.parameter1AsInt = buffer.readUInt32LE(4);
-  this.parameter2AsInt = buffer.readUInt32LE(8);
-  this.command = data.substring(0, 8);
-  this.commandAsInt = buffer.readUInt32LE(0);
-  this.commandAsByte = buffer.readUInt8(0);
+  this.command = buffer.readUInt8(0);
+  this.commandName = secEnum.byId[this.command];
+
+  var comandExtender = CommandParser[this.command];
+  if(typeof(comandExtender) == 'function')
+    comandExtender.call(this, buffer);
 }
 
 var SecCommandPrototype = function SecCommandPrototype() {

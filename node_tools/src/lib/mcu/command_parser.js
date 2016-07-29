@@ -1,4 +1,3 @@
-const simpleCommand = require('./simple_command');
 module.exports = {
   '0': require('./lock_event'),
   '2': require('./status_parser'),

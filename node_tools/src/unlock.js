@@ -10,7 +10,7 @@ require('./lib/async_logging');
 
 const environment = new Environment(environmentConfig);
 function log(channel, data) {
-  console.log(channel + ': ' + data.toString('hex'));
+  console.log(channel + ' :', data);
 }
 
 lockScanner.on('lockFound', async lock => {

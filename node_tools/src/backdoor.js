@@ -19,9 +19,7 @@ function log(channel, data) {
 
 async function onSecUpdate(session, data) {
   var command = new SecCommand(data.substring(0,32));
-
-  var cmdName = secEnum.byId[command.commandAsByte];
-  switch(cmdName) {
+  switch(command.commandName) {
     case 'StagedLowerHalfOfOfflineKey':
       await session.secWrite(cmd.stageOfflineKeyPt2(backdoorKey.substring(16,32)).data);
     break;

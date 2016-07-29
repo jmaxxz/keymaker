@@ -3,13 +3,11 @@ const Session = require('./lib/offline_session');
 const util = require('util');
 const delay = require('./lib/delay');
 const cmd = require('./lib/command_builder');
-const secEnum = require('./lib/sec/command_enum');
 const SecCommand = require('./lib/sec/sec_command');
 const environmentConfig = require('../environment.json');
 const Environment = require('./lib/environment')
 require('./lib/async_logging');
 
-//32196
 const keyMap = [
   { start: 32185, count: 1, offset: 4, initialSlot: 0, ignoreChecksum: true },
   { start: 17410, count: 99, offset: 4, initialSlot: 1 },
@@ -34,6 +32,10 @@ function extractKeys(buffer, offset, initialSlot, count, ignoreChecksum) {
   return results;
 }
 
+function log(channel, data) {
+  console.log(channel + ': ' + data.toString('hex'));
+}
+
 function printKeys(keys) {
   for (let i = 0; i < keys.length; i++) {
     console.log('KeySlot:' + keys[i].keySlot + ' key:' + keys[i].key);
@@ -42,10 +44,9 @@ function printKeys(keys) {
 
 async function onSecResponse(session, state, data) {
   let secCmd = new SecCommand(data);
-  if(secEnum.byId[secCmd.commandAsByte] == 'ResponseGetFlashPageData'){
+  if(secCmd.commandName == 'ResponseGetFlashPageData'){
     var i = secCmd.rawBuffer.readUInt16BE(1);
-    state.buffer.write(secCmd.parameter1, (i - keyMap[state.part].start) * 8, 'hex');
-    state.buffer.write(secCmd.parameter2, (i - keyMap[state.part].start) * 8 + 4, 'hex');
+    state.buffer.write(secCmd.flashContents, (i - keyMap[state.part].start) * 8, 'hex');
 
     if((i-keyMap[state.part].start)*8 < 20 * (keyMap[state.part].count) + keyMap[state.part].offset/8) {
       return await session.secWrite(cmd.readSecFlash(i + 1).data);
@@ -65,7 +66,7 @@ async function onSecResponse(session, state, data) {
     await session.secWrite(cmd.disconnect().data)
     session.disconnect();
   } else {
-    console.log('sec->comp', data);
+    console.log('sec->comp', secCmd);
   }
 }
 

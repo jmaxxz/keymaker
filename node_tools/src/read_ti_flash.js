@@ -5,7 +5,6 @@ const util = require('util');
 const delay = require('./lib/delay');
 const cmd = require('./lib/command_builder');
 const sounds = require('./lib/mcu/sound_enum');
-const secEnum = require('./lib/sec/command_enum');
 const SecCommand = require('./lib/sec/sec_command');
 const environmentConfig = require('../environment.json');
 const Environment = require('./lib/environment')
@@ -26,7 +25,7 @@ const environment = new Environment(environmentConfig);
 
 async function onSecResponse(session, data, state) {
   let secCmd = new SecCommand(data);
-  if(secEnum.byId[secCmd.commandAsByte] == 'ResponseGetFlashPageData'){
+  if(secCmd.commandName == 'ResponseGetFlashPageData'){
     let i = secCmd.rawBuffer.readUInt16BE(1)+1;
     await logStream.write(new Buffer(secCmd.parameter1 + secCmd.parameter2, 'hex'));
     console.log('Requesting:', i);
