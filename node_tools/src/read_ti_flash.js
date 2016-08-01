@@ -27,7 +27,7 @@ async function onSecResponse(session, data, state) {
   let secCmd = new SecCommand(data);
   if(secCmd.commandName == 'ResponseGetFlashPageData'){
     let i = secCmd.rawBuffer.readUInt16BE(1)+1;
-    await logStream.write(new Buffer(secCmd.parameter1 + secCmd.parameter2, 'hex'));
+    await logStream.write(new Buffer(secCmd.flashContents, 'hex'));
     console.log('Requesting:', i);
     await session.secWrite(cmd.readSecFlash(i).data);
   } else {

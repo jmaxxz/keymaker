@@ -182,11 +182,11 @@ exports.stageOfflineKeyPt2 = function stageOfflineKeyPt2(keyPart2) {
   return new SecCommand(temp.toString('hex')).addChecksum();
 }
 
-exports.commitOfflineKey = function commitOfflineKey(key, keyId) {
+exports.commitOfflineKey = function commitOfflineKey(key, keyId, mode) {
   constraint.isInt(keyId, 'keyId')
   constraint.isBetweenInclusive(keyId, 'keyId', 0, 255)
 
-  if(keyId === 0){
+  if(keyId === 0 && mode !== 'DangerZone'){
     /*
     * Why is this dangerous?
     *
@@ -220,11 +220,11 @@ exports.commitOfflineKey = function commitOfflineKey(key, keyId) {
   return new SecCommand(temp.toString('hex')).addChecksum();
 }
 
-exports.clearKeySlot = function clearKeySlot(keyId) {
+exports.clearKeySlot = function clearKeySlot(keyId, mode) {
   constraint.isUInt(keyId, 'keyId');
   constraint.isBetweenInclusive(keyId, 'keyId', 0, 255);
 
-  if(keyId === 0) {
+  if(keyId === 0 && mode !== 'DangerZone') {
     /*
     * Why is this dangerous?
     *

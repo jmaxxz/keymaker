@@ -11,6 +11,8 @@ require('./lib/async_logging');
 
 var backdoorKey = 'C8BEEFBACD009ACCE55BACD009ACCE55';
 var backdoorKeyId = 0xC8;
+// Don't change the mode unless you know exactly what you are doing
+var mode = null;
 
 const environment = new Environment(environmentConfig);
 function log(channel, data) {
@@ -25,7 +27,7 @@ async function onSecUpdate(session, data) {
     break;
 
     case 'StagedUpperHalfOfOfflineKey':
-      await session.secWrite(cmd.commitOfflineKey(backdoorKey, backdoorKeyId).data);
+      await session.secWrite(cmd.commitOfflineKey(backdoorKey, backdoorKeyId, mode).data);
     break;
 
     case 'CommittedOfflineKey':
