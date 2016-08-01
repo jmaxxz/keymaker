@@ -18,9 +18,16 @@ bd4ac6100b4511e38ffd0800200c9a66
     properties  indicate
 */
 const mcuWriteId    = 'bd4ac6110b4511e38ffd0800200c9a66';
+const mcuWriteId2   = 'e295c55169d011e4b116123b93f75cba';
+
 const mcuReadId     = 'bd4ac6120b4511e38ffd0800200c9a66';
+const mcuReadId2    = 'e295c55269d011e4b116123b93f75cba';
+
 const secWriteId    = 'bd4ac6130b4511e38ffd0800200c9a66';
+const secWriteId2   = 'e295c55369d011e4b116123b93f75cba';
+
 const secIndicateId = 'bd4ac6140b4511e38ffd0800200c9a66';
+const secIndicateId2 = 'e295c55469d011e4b116123b93f75cba';
 
 var Lock = function Lock(peripheral) {
   EventEmitter.call(this);
@@ -44,7 +51,7 @@ function LockPrototype(){
         resolve();
       }
 
-      this.peripheral.discoverServices(['bd4ac6100b4511e38ffd0800200c9a66'], (err, services)=>{
+      this.peripheral.discoverServices(['e295c55169d011e4b116123b93f75cba', 'bd4ac6100b4511e38ffd0800200c9a66'], (err, services)=>{
         if(err) reject(err);
         if(services.length == 0) reject('Missing services');
 
@@ -55,15 +62,19 @@ function LockPrototype(){
 
             characteristics.forEach((c)=>{
               switch (c.uuid){
+                case mcuWriteId2:
                 case mcuWriteId:
                   this.characteristics[mcuWriteId] = c;
                   break;
+                case mcuReadId2:
                 case mcuReadId:
                   this.characteristics[mcuReadId] = c;
                   break;
+                case secWriteId2:
                 case secWriteId:
                   this.characteristics[secWriteId] = c;
                   break;
+                case secIndicateId2:
                 case secIndicateId:
                   this.characteristics[secIndicateId] = c;
                   break;
