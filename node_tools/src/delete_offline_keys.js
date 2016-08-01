@@ -27,7 +27,7 @@ async function onSecResponse(session, data) {
 
 async function onSessionStart(session) {
   session.on('secUpdate', async d=>await onSecResponse(session, d));
-  await session.secWrite(cmd.clearKeySlot(0).data);
+  await session.secWrite(cmd.clearKeySlot(1).data);
 }
 
 lockScanner.on('lockFound', async lock => {
