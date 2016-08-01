@@ -137,9 +137,15 @@ exports.getParameter = function getParameter(parameterId) {
   return new McuCommand(temp.toString('hex')).addChecksum();
 }
 
-exports.setParameter = function setParameter(parameterId, value) {
+exports.setParameter = function setParameter(parameterId, value, mode) {
   constraint.isByte(parameterId, 'parameterId');
   constraint.isInt32(value, 'value');
+
+  if(mode !== 'DangerZone' && (parameterId === 120 && value !== 0)) {
+    throw error('This would have the progrograming of the TI chip in the lock. '
+      + 'This could prevent the lock from working. Only disable this safety check '
+      + 'if you understand and accept this risk.');
+  }
 
   //                    '<  cmd ><Param1><Param2>'
   var temp = new Buffer('ee030000000000000000000000000000', 'hex');
