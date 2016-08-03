@@ -10,6 +10,9 @@ var EnvironmentPrototype = function EnvironmentPrototype() {
 
   this.createKeychainForLock = function createKeychainForLock(lockId) {
     var lockIndex = _.findIndex(this.rawConfig.locks, { id:lockId })
+    if(lockId < 0) {
+      lockIndex = _.findIndex(this.rawConfig.locks, { id:'default' })
+    }
     if(lockIndex < 0) {
       return;
     }
