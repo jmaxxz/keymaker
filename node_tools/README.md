@@ -19,6 +19,13 @@ Example *environment.json*
 			"offlineKeys": [
 				{ "keySlot": 0, "key": "1A6CDDA5B89F322FC3D9B1F28E6B4137" }
 			]
+		},
+		{
+			"preferedKeyId": "0fc8",
+			"id": "default",
+			"offlineKeys": [
+				{ "keySlot": 200, "key": "C8BEEFBACD009ACCE55BACD009ACCE55"}
+			]
 		}
 	]
 }
