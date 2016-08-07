@@ -14,7 +14,7 @@ module.exports = new Enum({
   '11': 'Lock',
   '12': 'CalibrateLock',
   '13': 'PlayAudio', // ids:32, 33, 34, 35
-  '14': 'Led', // Nothing seems valid, everything results in all red flash
+  '14': 'Led', // 0 flashes red, 1 flashes green
   '15': 'ClearNotifications',
   '16': 'SetRtc',
   '17': 'SecureUnlock', // Lock does not know about this

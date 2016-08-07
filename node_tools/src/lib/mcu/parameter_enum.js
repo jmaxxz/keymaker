@@ -2,7 +2,7 @@ const Enum = require('../enum');
 // Parameters 0-78 default to 0 on a factory reset
 module.exports = new Enum({
   '0': 'BackoffTimeMs',
-  '1': 'AnimationPeriodMs', // the delay in ms between led frame. (have tested 5-500)
+  '1': 'AnimationPeriodMs', // The delay in ms between led frame. (have tested 5-500) Default=30
   '2': 'BatteryType',
   '3': 'SerialNumberPt2',
   '4': 'SerialNumberPt1',
@@ -55,7 +55,7 @@ module.exports = new Enum({
   '51': 'Simulated', // Default: -1, does not seem to do anything
   '52': 'AngleTau',
   '53': 'AccVerbose',
-  '54': 'MotionVerbose', // Default: 0, does not seem to do anything 
+  '54': 'MotionVerbose', // Default: 0, does not seem to do anything
   '55': 'MinAwakeTime',
   '56': 'AudioEnabled',
   '57': 'BurninTrigger', // Default: 1, set to 0 and reboot to trigger burnin

@@ -13,7 +13,6 @@ var backdoorKeyId = 0xC8;
 // Don't change the mode unless you know exactly what you are doing
 var mode = null;
 
-const environment = new Environment(environmentConfig);
 function log(channel, data) {
   console.log(channel + ': ' + data.toString('hex'));
 }

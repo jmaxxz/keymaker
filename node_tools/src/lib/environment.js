@@ -1,4 +1,4 @@
-const _ = require('lodash');
+  const _ = require('lodash');
 const Keychain = require('./keychain');
 const hexify = require('./hexify');
 
@@ -9,9 +9,10 @@ var Environment = function Environment(environmentConfig) {
 var EnvironmentPrototype = function EnvironmentPrototype() {
 
   this.createKeychainForLock = function createKeychainForLock(lockId) {
-    var lockIndex = _.findIndex(this.rawConfig.locks, { id:lockId })
-    if(lockId < 0) {
-      lockIndex = _.findIndex(this.rawConfig.locks, { id:'default' })
+    var lockIndex = _.findIndex(this.rawConfig.locks, { id:lockId });
+
+    if(lockIndex < 0) {
+      lockIndex = _.findIndex(this.rawConfig.locks, { id:'default' });
     }
     if(lockIndex < 0) {
       return;

@@ -59,7 +59,7 @@ function readFile(file) {
   });
 }
 
-glob('examples/logs/**/*.log', {}, async function (er, files) {
+glob('../examples/logs/**/*.log', {}, async function (er, files) {
   for (var i = 0; i < files.length; i++) {
     console.log(files[i])
     var data = await readFile(files[i]);
