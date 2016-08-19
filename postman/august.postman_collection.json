@@ -216,7 +216,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"code\":\"000000\",\n  \"value\":\"{{Phone}}\"\n}"
+							"raw": "{\n  \"code\":\"000000\",\n  \"phone\":\"{{Phone}}\"\n}"
 						},
 						"description": "Send code to reset password"
 					},
@@ -276,7 +276,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"code\":\"000000\",\n  \n  \"value\":\"{{Email}}\"\n}"
+							"raw": "{\n  \"code\":\"000000\",\n  \n  \"email\":\"{{Email}}\"\n}"
 						},
 						"description": "Send code to reset password"
 					},
