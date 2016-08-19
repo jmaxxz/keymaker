@@ -13,7 +13,11 @@ var AugustApi = function AugustApi(config) {
     });
   }
 
-  var makeRequest = function makeRequest(option) {
+  var makeRequest = async function makeRequest(option) {
+    return (await makeRawRequest(option)).body;
+  }
+
+  var makeRawRequest = function makeRawRequest(option) {
     return new Promise(function(resolve, reject) {
       request(option, function(error, response, body) {
         if(error){
@@ -22,9 +26,68 @@ var AugustApi = function AugustApi(config) {
         if(response.statusCode < 200 || response.statusCode > 299){
           return reject(new Error('Http error: ' + response.statusCode, response, body));
         }
-        resolve(body);
+        resolve({response:response, body:body});
       });
     });
+  }
+
+  this.updateJwt = function updateJwt(newJwt) {
+    config.jwt = newJwt;
+  }
+
+  this.sendCodeToPhone = function sendCodeToPhone(phoneNumber) {
+    //
+    var option = getBaseRequest();
+    option.url += 'validation/phone';
+    option.method = 'POST';
+    option.body = {
+      value: phoneNumber
+    };
+    return makeRawRequest(option);
+  }
+
+  this.validatePhone = function validatePhone(phoneNumber, code) {
+    var option = getBaseRequest();
+    option.url += 'validate/phone';
+    option.method = 'POST';
+    option.body = {
+      code: code,
+      phone: phoneNumber
+    };
+    return makeRawRequest(option);
+  }
+  this.sendCodeToEmail = function sendCodeToEmail(emailAddress) {
+    //
+    var option = getBaseRequest();
+    option.url += 'validation/email';
+    option.method = 'POST';
+    option.body = {
+      value: emailAddress
+    };
+    return makeRawRequest(option);
+  }
+
+  this.validateEmail = function validateEmail(emailAddress, code) {
+    var option = getBaseRequest();
+    option.url += 'validate/email';
+    option.method = 'POST';
+    option.body = {
+      code: code,
+      email: emailAddress
+    };
+    return makeRawRequest(option);
+  }
+  this.authenticate = function authenticate(userid, password) {
+    // https://api-production.august.com/session
+    var option = getBaseRequest();
+    option.url += 'session';
+    option.method = 'POST';
+    option.body = {
+      identifier:userid,
+      installId:config.installId,
+      password:password
+    };
+    return makeRawRequest(option);
   }
 
   this.getLocks = function getLocks() {
