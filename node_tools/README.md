@@ -6,9 +6,6 @@ Example *environment.json*
 {
 	"api": {
   		"jwt": "<token>",
-  		"email": "example@example.com",
-  		"password": "IHaveBadPasswords",
-  		"phone": "+15551231234",
   		"installId": "E629CCCC-A9E0-40F1-8BB8-43A24830346B",
   		"keaseApiKey": "14445b6a2dba"
 	},
