@@ -1,0 +1,16 @@
+{
+    "api": {
+        "jwt": "<token>",
+        "installId": "E629CCCC-A9E0-40F1-8BB8-43A24830346B",
+        "keaseApiKey": "14445b6a2dba"
+    },
+    "locks": [
+        {
+            "preferedKeyId": "0fc8",
+            "id": "default",
+            "offlineKeys": [
+                { "keySlot": 200, "key": "C8BEEFBACD009ACCE55BACD009ACCE55"}
+            ]
+        }
+    ]
+}
