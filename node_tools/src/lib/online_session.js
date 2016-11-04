@@ -33,7 +33,7 @@ var OnlineSessionPrototype = function OnlineSessionPrototype() {
     var results = await this.api.getLockRands(this.lock.id, data);
     secondHalfKey.writeUInt32LE(results.lRand1, 0);
     secondHalfKey.writeUInt32LE(results.lRand2, 4);
-    this.emit('secUpdate', cmd.sendSessionKeyPt2(secondHalfKey.toString('hex')).data + '0f00');
+    this.emit('secUpdate', cmd.sendSessionKeyPt2(secondHalfKey.toString('hex')).data + this.connectionKeyId);
 
     this.key = this.sessionKeyPt1 + secondHalfKey.toString('hex');
     this.keychain.setSessionKey(this.key, this.connectionKeyId);
@@ -92,7 +92,8 @@ var OnlineSessionPrototype = function OnlineSessionPrototype() {
     var halfKey = crypto.randomBytes(8);
     this.sessionKeyPt1 = halfKey.toString('hex');
     var results = await this.api.initComms(this.lock.id, halfKey);
-    this.emit('secWrite', cmd.sendSessionKey(this.sessionKeyPt1).data + '0f00');
+    this.connectionKeyId = results.packet.substring(32, 36);
+    this.emit('secWrite', cmd.sendSessionKey(this.sessionKeyPt1).data + this.connectionKeyId);
 
     this.lock.once('secUpdate', this.initComms2.bind(this));
     await this.lock.secWrite(results.packet);

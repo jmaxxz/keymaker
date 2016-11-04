@@ -14,7 +14,8 @@ var AugustApi = function AugustApi(config) {
   }
 
   var makeRequest = async function makeRequest(option) {
-    return (await makeRawRequest(option)).body;
+    var response = await makeRawRequest(option);
+    return response.body;
   }
 
   var makeRawRequest = function makeRawRequest(option) {
