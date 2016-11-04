@@ -1,11 +1,10 @@
 const lockScanner = require('./lib/lock_scanner');
-const Session = require('./lib/offline_session');
+const Session = require('./lib/online_session');
 const util = require('util');
 const delay = require('./lib/delay');
 const cmd = require('./lib/command_builder');
 const SecCommand = require('./lib/sec/sec_command');
 const environmentConfig = require('../environment.json');
-const Environment = require('./lib/environment')
 require('./lib/async_logging');
 
 const keyMap = [
@@ -14,8 +13,6 @@ const keyMap = [
   { start: 17920, count: 100, offset: 0, initialSlot: 100 },
   { start: 18432, count: 57, offset: 0, initialSlot: 200 }
   ];
-
-const environment = new Environment(environmentConfig);
 
 function extractKeys(buffer, offset, initialSlot, count, ignoreChecksum) {
   var results = [];
@@ -78,14 +75,9 @@ async function onSessionStart(session) {
 
 lockScanner.on('lockFound', async lock => {
   console.log('Connected to', lock.id);
-  var keychain = environment.createKeychainForLock(lock.id);
-  if(!keychain) {
-    console.log('No offline keys for lock.');
-    return;
-  }
 
   try {
-    var session = new Session(lock, keychain, keychain.preferedKeyId);
+    var session = new Session(lock, environmentConfig.api);
     session.once('established', async d=>await onSessionStart(session));
     session.on('disconnect', d=>console.log('Disconnected from', lock.id))
     lock.on('error', d=>log('err', d));
