@@ -11,10 +11,12 @@ function LockScanner() {
     noble.on('stateChange', function(state) {
       if (state === 'poweredOn') {
         noble.startScanning(["bd4ac6100b4511e38ffd0800200c9a66"], false);
+        this.emit('start');
       } else {
         noble.stopScanning();
+        this.emit('stop');
       }
-    });
+    }.bind(this));
 
     noble.on('discover', async peripheral => {
       // things seem pretty unstable if one starts looking

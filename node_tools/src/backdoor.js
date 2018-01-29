@@ -10,6 +10,7 @@ require('./lib/async_logging');
 
 var backdoorKey = 'C8BEEFBACD009ACCE55BACD009ACCE55';
 var backdoorKeyId = 0xC8;
+
 // Don't change the mode unless you know exactly what you are doing
 var mode = null;
 
@@ -60,4 +61,6 @@ lockScanner.on('lockFound', async lock => {
 });
 
 lockScanner.on('error', e => console.log(e));
+lockScanner.on('start', e=> console.log("Scan started"));
+lockScanner.on('stop', e=> console.log("Scan stopped"))
 lockScanner.start();
